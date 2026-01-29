@@ -1,0 +1,28 @@
+---
+galaxy_info:
+  author: frozenfoxx
+  description: Install and manage system Python installation
+  license: Apache-2.0
+  min_ansible_version: "2.9"
+
+  platforms:
+    - name: Debian
+      versions:
+        - bullseye
+        - bookworm
+    - name: Ubuntu
+      versions:
+        - focal
+        - jammy
+        - noble
+    - name: ArchLinux
+      versions:
+        - all
+
+  galaxy_tags:
+    - python
+    - python3
+    - development
+    - system
+
+dependencies: []

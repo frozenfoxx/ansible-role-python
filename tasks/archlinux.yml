@@ -1,0 +1,28 @@
+---
+- name: Install Python and necessary tools
+  community.general.pacman:
+    name: "{{ python_archlinux_packages }}"
+    state: present
+    update_cache: true
+  become: true
+  tags:
+    - python
+
+- name: Install additional system Python packages
+  community.general.pacman:
+    name: "{{ python_system_packages }}"
+    state: present
+  become: true
+  when: python_system_packages | length > 0
+  tags:
+    - python
+
+- name: Upgrade pip to latest version
+  ansible.builtin.pip:
+    name: pip
+    state: latest
+    executable: pip
+  become: true
+  when: python_upgrade_pip | bool
+  tags:
+    - python

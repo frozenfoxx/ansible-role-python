@@ -1,0 +1,35 @@
+---
+- name: Include OS-specific variables
+  ansible.builtin.include_vars: "{{ lookup('ansible.builtin.first_found', params) }}"
+  vars:
+    params:
+      files:
+        - "{{ ansible_distribution | lower }}-{{ ansible_distribution_version }}.yml"
+        - "{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version }}.yml"
+        - "{{ ansible_distribution | lower }}.yml"
+        - "{{ ansible_os_family | lower }}.yml"
+        - "default.yml"
+      paths:
+        - "vars"
+  tags:
+    - python
+
+- name: Handle installation for Debian
+  ansible.builtin.import_tasks: debian.yml
+  when: ansible_facts['os_family'] | lower == 'debian'
+  tags:
+    - python
+
+- name: Handle installation for Arch Linux
+  ansible.builtin.import_tasks: archlinux.yml
+  when: ansible_facts['os_family'] | lower == 'archlinux'
+  tags:
+    - python
+
+- name: Fail if OS family is unsupported
+  ansible.builtin.fail:
+    msg: "OS family {{ ansible_facts['os_family'] }} is not supported by this role"
+  when:
+    - ansible_facts['os_family'] | lower not in ['debian', 'archlinux']
+  tags:
+    - python

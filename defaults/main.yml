@@ -1,0 +1,22 @@
+---
+# Debian/Ubuntu specific packages
+python_debian_packages:
+  - python3
+  - python3-pip
+  - python3-venv
+
+# Arch Linux specific packages
+python_archlinux_packages:
+  - python
+  - python-pip
+
+# Additional system packages to install (OS-agnostic)
+# Override this in your playbook for OS-specific packages
+python_system_packages: []
+
+# Python version preferences (optional)
+# Leave empty to use distribution default
+python_version: ""
+
+# Whether to ensure pip is upgraded to latest
+python_upgrade_pip: false
