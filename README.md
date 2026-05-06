@@ -50,6 +50,18 @@ python_version: ""
 python_upgrade_pip: false
 ```
 
+### Per-OS Overrides
+
+The role loads OS-specific variable files from `vars/` via `first_found`, in this order of precedence:
+
+1. `vars/<distribution>-<version>.yml` (e.g. `ubuntu-22.04.yml`)
+2. `vars/<distribution>-<major_version>.yml` (e.g. `debian-12.yml`)
+3. `vars/<distribution>.yml` (e.g. `ubuntu.yml`)
+4. `vars/<os_family>.yml` (e.g. `debian.yml`, `archlinux.yml`)
+5. `vars/default.yml` (fallback)
+
+The shipped files are empty placeholders. Drop overrides into the appropriate file when a distribution or version needs different values than `defaults/main.yml` provides.
+
 ## Dependencies
 
 None
