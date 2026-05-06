@@ -1,0 +1,4 @@
+---
+# Fallback variables for unrecognized distributions.
+# OS-agnostic defaults live in defaults/main.yml; override here only when
+# a distribution needs different values than the defaults provide.
